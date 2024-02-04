@@ -1,0 +1,284 @@
+<html>
+  <head>
+    <title>College Automation Package</title>
+    <style>
+      /*
+          #92217a
+          #801469
+          #f66c2a
+          #f66826
+          #60aef8
+          #52a3ef
+      */
+      :root {
+        --card-br: 12px;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-color: rgb(209, 220, 235);
+      }
+      .container {
+        width: 1200px;
+        padding: 10px;
+        background-color: #fff;
+        margin: 0 auto;
+      }
+      .content {
+        width: 100%;
+        margin-top: 25px;
+        height: 474px;
+        display: flex;
+        flex-direction: column;
+        background-color: rgb(245, 245, 245);
+        border-top: 1px solid #cccccc;
+      }
+      .inner-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        /* align-items: center; */
+        margin-top: 50px;
+      }
+      .card-bg {
+        width: 265px;
+        height: 276.4px;
+        background-color: #fff;
+        position: relative;
+      }
+      img.profile,
+      div.profile.last {
+        position: absolute;
+
+        /* height: 10 0px; */
+      }
+
+      div.profile.last {
+        z-index: 2;
+        width: 105px;
+        bottom: -4px;
+        left: 0;
+      }
+      .profile.first {
+        bottom: 8px;
+        left: 2px;
+        width: 90px;
+      }
+      .profile.middle {
+        bottom: -2px;
+        left: -4px;
+        width: 94px;
+      }
+      .card {
+        border-radius: var(--card-br);
+        margin-top: 30px;
+        margin-bottom: 15px;
+        height: calc(100% - 45px);
+        margin-left: 20px;
+        margin-right: 35px;
+        width: calc(100% - 60px);
+        display: flex;
+        flex-direction: column;
+        box-shadow: 1px 0 5px 1px rgba(52, 52, 52, 0.391);
+      }
+
+      /* border radiuses */
+      .card-top {
+        border-top-left-radius: var(--card-br);
+        border-top-right-radius: var(--card-br);
+      }
+      .card-body,
+      .card-footer {
+        border-bottom-left-radius: var(--card-br);
+        border-bottom-right-radius: var(--card-br);
+      }
+
+      .card-footer {
+        height: 15px;
+      }
+      .card-body {
+        flex: 1;
+        background-color: white;
+        padding: 20px 20px;
+      }
+      .card-top {
+        height: 70px;
+        position: relative;
+      }
+      .card-top-text {
+        position: absolute;
+        bottom: 8px;
+        /* left: 80px; */
+        font-weight: 600;
+        font-family: Geneva, Arial, Helvetica, sans-serif;
+        right: 20px;
+        /* background-color: red; */
+      }
+      .first-card {
+        background-color: #801469;
+        & .card-top-text {
+          color: #fff;
+        }
+      }
+
+      .center-card {
+        background-color: #f66c2a;
+        margin-left: 27.5px;
+        margin-right: 27.5px;
+        & .card-top-text {
+          color: rgb(255, 226, 209);
+        }
+
+        & .field-text {
+          color: #b41400 !important;
+        }
+      }
+      .last-card {
+        background-color: #60aef8;
+        & .card-top-text {
+          color: rgb(0, 0, 0);
+        }
+      }
+      .fields {
+        margin-bottom: 30px;
+      }
+      .field {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 4px;
+      }
+      .field-input {
+        font-size: 10px;
+        color: #0033cc;
+        font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+        height: 16px;
+        border: 1px solid #cccccc;
+        width: 95px;
+        padding: 9px 4px;
+      }
+      .field-text {
+        font-family: Geneva, Arial, Helvetica, sans-serif;
+        font-size: 11px;
+        font-weight: bold;
+        color: #fc3a00;
+        width: 61px;
+        padding: 1px;
+
+        /* height: 11px; */
+      }
+      .button-row {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-right: -6px;
+      }
+      button {
+        border-radius: 15px;
+        border: none;
+        font-size: 12px;
+        font-weight: 500;
+        padding: 3px 12px;
+        box-shadow: 1px 1px 3px 1px rgba(52, 52, 52, 0.391);
+      }
+      .button-first {
+        background-image: linear-gradient(to bottom, #92217a 10%, #fff);
+      }
+      .button-center {
+        background-image: linear-gradient(to bottom, #f66826 10%, #fff);
+      }
+      .button-last {
+        background-image: linear-gradient(to bottom, #60aef8 10%, #fff);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <img src="title_head.jpg" alt="1" />
+      <img src="diet.jpg" alt="1" />
+      <div class="content">
+        <div class="inner-container">
+          <div class="card-bg">
+            <img src="./profiles/left.png" alt="1" class="profile first 1" />
+            <div class="card first-card">
+              <div class="card-top">
+                <p class="card-top-text">Employee Login</p>
+              </div>
+              <form class="card-body" method="post" action="teacher.php">
+                <div class="fields">
+                  <div class="field">
+                    <div class="field-text">User Name</div>
+                    <input name="username" type="text" class="field-input" />
+                  </div>
+                  <div class="field">
+                    <div class="field-text">Password</div>
+                    <input name="password" type="text" class="field-input" />
+                  </div>
+                </div>
+                <div class="button-row">
+                  <button class="button-first">LOGIN</button>
+                </div>
+              </form>
+              <div class="card-footer"></div>
+            </div>
+          </div>
+          <div class="card-bg">
+            <img src="./profiles/middle.png" alt="1" class="profile middle 2" />
+            <div class="card center-card">
+              <div class="card-top">
+                <p class="card-top-text">Student Login</p>
+              </div>
+              <form class="card-body" method="post" action="student.php">
+                <div class="fields">
+                  <div class="field">
+                    <div class="field-text">User Name</div>
+                    <input name="username" type="text" class="field-input" />
+                  </div>
+                  <div class="field">
+                    <div class="field-text">Password</div>
+                    <input name="password" type="text" class="field-input" />
+                  </div>
+                </div>
+                <div class="button-row">
+                  <button class="button-center">LOGIN</button>
+                </div>
+              </form>
+              <div class="card-footer"></div>
+            </div>
+          </div>
+          <div class="card-bg">
+            <div class="profile last">
+              <object data="./profiles/right.svg" type="image/svg+xml"></object>
+            </div>
+            <div class="card last-card">
+              <div class="card-top">
+                <p class="card-top-text">Parent Login</p>
+              </div>
+              <form class="card-body" method="post" action="parent.php">
+                <div class="fields">
+                  <div class="field">
+                    <div class="field-text">User Name</div>
+                    <input name="username" type="text" class="field-input" />
+                  </div>
+                  <div class="field">
+                    <div class="field-text">Password</div>
+                    <input name="password" type="text" class="field-input" />
+                  </div>
+                </div>
+                <div class="button-row">
+                  <button class="button-last">LOGIN</button>
+                </div>
+              </form>
+              <div class="card-footer"></div>
+            </div>
+          </div>
+        </div>
+        <img src="bott_bg.gif" alt="1" />
+      </div>
+    </div>
+  </body>
+</html>

