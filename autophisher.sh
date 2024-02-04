@@ -246,9 +246,8 @@ msg_exit() {
 about() {
 	{ clear; banner; echo; }
 	cat <<- EOF
-		${GREEN} Author   ${RED}:  ${ORANGE}C.RANJITH KUMAR ${RED}[ ${ORANGE}CODING RANJITH ${RED}]
-		${GREEN} Github   ${RED}:  ${CYAN}https://github.com/CodingRanjith/autophisher
-		${GREEN} Social   ${RED}:  ${CYAN}https://techackode.blogspot.com
+		${GREEN} Author   ${RED}:  ${ORANGE}S. Jaya Surya ${RED}
+		${GREEN} Github   ${RED}:  ${CYAN}https://github.com/suryasarisa/autophisher
 		${GREEN} Version  ${RED}:  ${ORANGE}${__version__}
 
 		${WHITE} ${REDBG}Warning:${RESETBG}
