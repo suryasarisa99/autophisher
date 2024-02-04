@@ -84,7 +84,7 @@
         flex-direction: column;
         box-shadow: 1px 0 5px 1px rgba(52, 52, 52, 0.391);
       }
-
+      Student
       /* border radiuses */
       .card-top {
         border-top-left-radius: var(--card-br);
