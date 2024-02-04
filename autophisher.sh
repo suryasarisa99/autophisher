@@ -356,6 +356,7 @@ capture_data() {
 
 ## Start ngrok
 start_ngrok() {
+	install_ngrok
 	echo -e "\n${WHITE}[${GREEN}-${WHITE}]${BLUE} Initializing... ${GREEN}( ${CYAN}http://$HOST:$PORT ${GREEN})"
 	{ sleep 1; setup_site; }
 	echo -e "\n"
@@ -381,6 +382,7 @@ start_ngrok() {
 
 ## Start Cloudflared
 start_cloudflared() { 
+	install_cloudflared
     rm .cld.log > /dev/null 2>&1 &
 	echo -e "\n${WHITE}[${GREEN}-${WHITE}]${BLUE} Initializing... ${ORANGE}( ${CYAN}http://$HOST:$PORT ${ORANGE})"
 	{ sleep 1; setup_site; }
@@ -420,6 +422,7 @@ localxpose_auth() {
 
 ## Start LocalXpose (Again...)
 start_loclx() {
+	install_localxpose
 	echo -e "\n${WHITE}[${GREEN}-${WHITE}]${BLUE} Initializing... ${CYAN}( ${ORANGE}http://$HOST:$PORT ${CYAN})"
 	{ sleep 1; setup_site; localxpose_auth; }
 	echo -e "\n"
@@ -665,8 +668,5 @@ main_menu() {
 ## Main
 kill_pid
 dependencies
-install_ngrok
-install_cloudflared
-install_localxpose
 read_host
 main_menu
